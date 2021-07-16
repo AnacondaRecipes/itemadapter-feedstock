@@ -1,5 +1,5 @@
 {% set name = "itemadapter" %}
-{% set version = "0.2.0" %}
+{% set version = "0.3.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: cb7aaa577fefe2aa6f229ccf4d058e05f44e0178a98c8fb70ee4d95acfabb423
+  sha256: ab2651ba20f5f6d0e15f041deba4c13ffc59270def2bd01518d13e94c4cd27d1
 
 build:
   noarch: python
@@ -16,10 +16,16 @@ build:
 
 requirements:
   host:
-    - python >=3.5
+    - python >=3.6
     - pip
+    - setuptools
+    - wheel
   run:
-    - python >=3.5
+    - python >=3.6
+    # Optional dependencies
+    #- scrapy # needed to interact with scrapy items
+    #- attrs # needed to interact with attrs-based items
+    #- pydantic # needed to interact with pydantic-based items
 
 test:
   imports:
@@ -39,6 +45,8 @@ about:
     The ItemAdapter class is a wrapper for data container objects, providing a
     common interface to handle objects of different types in an uniform manner,
     regardless of their underlying implementation.
+  dev_url: https://github.com/scrapy/itemadapter
+  doc_url: https://github.com/scrapy/itemadapter/blob/master/README.md
 
 extra:
   recipe-maintainers:
