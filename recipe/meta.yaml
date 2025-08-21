@@ -1,31 +1,35 @@
 {% set name = "itemadapter" %}
-{% set version = "0.3.0" %}
+{% set version = "0.12.1" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: ab2651ba20f5f6d0e15f041deba4c13ffc59270def2bd01518d13e94c4cd27d1
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: a0431fe5b3f9d95b7e9a20e05789672bc733c173d9989dc9d515ba6b0b9b6a08
 
 build:
   noarch: python
   number: 0
   script: {{ PYTHON }} -m pip install . -vv
+  skip: true  # [py<39]
 
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
-    - setuptools
-    - wheel
+    - hatchling
   run:
-    - python >=3.6
+    - python
     # Optional dependencies
     #- scrapy # needed to interact with scrapy items
     #- attrs # needed to interact with attrs-based items
     #- pydantic # needed to interact with pydantic-based items
+  run_constrained:
+    - attrs >=20.1.0
+    - pydantic >=1.8
+    - scrapy >=2.2
 
 test:
   imports:
